@@ -9,9 +9,9 @@ param (
 #Force Run As Admin
 If(-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {   
-$arguments = "& '" + $myinvocation.mycommand.definition + "'"
-Start-Process powershell -Verb runAs -ArgumentList $arguments
-Break
+    $arguments = "& '" + $myinvocation.mycommand.definition + "'"
+    Start-Process powershell -Verb runAs -ArgumentList $arguments
+    Break
 }
 
 <#
@@ -25,6 +25,13 @@ Break
         DWM has a memory leak likely from the Intel GPU driver, there's currently no fix as of 6-11-24. 
             So a workaround is to kill it and restart it.
             The memory leak is a well known issue for sub 11th gen intel CPU's up to a certain driver version.
+
+    .ColorPallete
+        Green = Standard or good output
+        Yellow = Information
+        Cyan = User input required
+        Red = errors
+        
     .Changes
         6-20-2024:
             *Added Microsoft Teams to the process list
